@@ -29,15 +29,12 @@ def draw_arena():
                 pygame.draw.rect(WINDOW, GREY, (c*TILE_SIZE, r*TILE_SIZE, TILE_SIZE, TILE_SIZE))
                 pygame.draw.rect(WINDOW, BLACK, (c*TILE_SIZE, r*TILE_SIZE, TILE_SIZE, TILE_SIZE), 1)
 
-
 #Set up elixir on screen
 
 def draw_elixir():
     for i in range(game.player_elixir.elixir_count):
         pygame.draw.rect(WINDOW, PURPLE, (WINDOW_WIDTH - 10, WINDOW_HEIGHT - (i * 20), 15, 155))
         
-
-
 #Set up deck on screen
 def draw_deck():
     WINDOW.blit(deck[0].image_pathing(), (ARENA_WIDTH, 0))
@@ -57,11 +54,14 @@ def draw_deck():
     rect_4 = deck[3].image_pathing().get_rect(topleft=(ARENA_WIDTH, 0))
     #pygame.draw.rect(WINDOW, GREY, (ARENA_WIDTH, 0, 108, WINDOW_HEIGHT))
 
-
 def draw_cards(selected_card, grid_x, grid_y):
     card_ani = selected_card.animation(selected_card)
     card_ani.blit(WINDOW, (grid_x, grid_y))
     
+def draw_towers(tower_list):
+    for tower in tower_list:
+        tower_picture = tower.animation()
+        WINDOW.blit(tower_picture, (tower.x, tower.y))
         
 '''
 def draw_timers():

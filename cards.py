@@ -1,5 +1,6 @@
 import os
 import pygame
+import random
 from pathfinding.core.diagonal_movement import DiagonalMovement
 from pathfinding.core.grid import Grid
 from pathfinding.finder.a_star import AStarFinder
@@ -293,7 +294,7 @@ class Towers:
             self.die(card)
     
     def animation(self):
-        image = pygame.image.load(self.tower_animation).convert_alpha()
+        image = pygame.image.load(self.tower_animation)
         scaled_image = pygame.transform.scale(image, (10, 14))
         return scaled_image
     
@@ -305,14 +306,15 @@ class Crown_Tower(Towers):
     def __init__(self, tower_type, hp, damage, range, attack_range, attack_cooldown, x, y, tower_animation, is_friendly):
         super().__init__(tower_type, hp, damage, range, attack_range, attack_cooldown, x, y, tower_animation, is_friendly)
 
+
 #princess tower setup
-enemy_ptower_left = Towers("Enemy_Tower", 1000, 50, 500, 5, 1.5, 1, 0, 0, False)
-enemy_ptower_right = Towers("Player_Tower", 1000, 50, 500, 500, 1.5, 15, 5, os.path.join(ANI_DIR_TOWER_R, "tower.jpg"), False)
-player_ptower_left = Towers("Player_Tower", 1000, 50, 5, 5, 1.5, 17, 0, 0, True)
-player_ptower_right = Towers("Player_Tower", 1000, 50, 5, 5, 1.5, 0, 23, 0, True)
+enemy_ptower_left = Towers("Enemy_Tower", 1000, 50, 500, 5, 1.5, 2, 5, os.path.join(ANI_DIR_TOWER_R, "tower.jpg"), False)
+enemy_ptower_right = Towers("Enemy_Tower", 1000, 50, 500, 500, 1.5, 15, 5, os.path.join(ANI_DIR_TOWER_R, "tower.jpg"), False)
+player_ptower_left = Towers("Player_Tower", 1000, 50, 5, 5, 1.5, 2, 18, os.path.join(ANI_DIR_TOWER_R, "tower.jpg"), True)
+player_ptower_right = Towers("Player_Tower", 1000, 50, 5, 5, 1.5, 15, 18, os.path.join(ANI_DIR_TOWER_R, "tower.jpg"), True)
 #crown tower setup
-enemy_crown_tower = Crown_Tower("Enemy_Crown_Tower", 1500, 75, 7, 5, 1, 1.2, 11, 0, False)
-player_crown_tower = Crown_Tower("Player_Crown_Tower", 1500, 75, 7, 5, 1.2, 17, 11, 0, False)
+enemy_crown_tower = Crown_Tower("Enemy_Crown_Tower", 1500, 75, 7, 5, 1, 9, 21, os.path.join(ANI_DIR_TOWER_R, "King_Tower_Red.jpg"), False)
+player_crown_tower = Crown_Tower("Player_Crown_Tower", 1500, 75, 7, 5, 1.2, 9, 2, os.path.join(ANI_DIR_TOWER_R, "King_Tower_Blue.jpg"), True)
 
 
 knight = Knight(1000, 1, 100, 500, 500, 1, 3, 0, 0, os.path.join(IMG_DIR, "knight.png"), None, False)
@@ -331,13 +333,18 @@ the_guy = The_Guy(10, 1, 1, 1, 1, 1, 0, 0, 0, os.path.join(IMG_DIR, "Golem.png")
 
 deck = [knight, archers, giant, the_guy]
 placed_card = []
-enemy_card = []
+enemy_placed = []
+tower_deck = [enemy_ptower_left, enemy_ptower_right, enemy_crown_tower, player_ptower_left, player_ptower_right, player_crown_tower]
 
 card_animation_list = [
     (knight, animation.knight_walk_E, animation.knight_walk_N, animation.knight_walk_S),
     (the_guy, animation.golem_walk_E, animation.golem_walk_N, animation.golem_walk_S),
 ]
 
+class Enemy():
+    def enemy_spawn(self):
+        pass
+
 #makes sure that the decks are consistent
-def decks():
+def deck_cycle():
     pass

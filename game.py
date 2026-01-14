@@ -1,8 +1,5 @@
 import pygame
 import time
-import random
-
-from src.towers import Towers, enemy_ptower_left, enemy_ptower_right, player_ptower_left, player_ptower_right, enemy_crown_tower, player_crown_tower
 
 start_time = pygame.time.get_ticks() // 1000  #convert to seconds
 
@@ -33,6 +30,7 @@ class Elixir():
                 return self.elixir_count
 
     def can_subtract_elixir(self, card):
+        print(self.elixir_count)
         #if elixir count is less than card cost, cannot play card
         if card.e_cost > self.elixir_count:
             return False
@@ -46,12 +44,8 @@ class Elixir():
             self.elixir_count -= card.e_cost
             return self.elixir_count
     
-
 player_elixir = Elixir(1)
-
-#attack
-#path finding
-#towers
+enemy_elixir = Elixir(1)
 
 class Gamelogic():
     def tower_down(self, current_time):
@@ -114,9 +108,6 @@ class Gamelogic():
     def arena_change(self):
         pass
 
-class Enemy():
-    def enemy_spawn(self):
-        pass
 #clock
 #crown
 #win/loss
